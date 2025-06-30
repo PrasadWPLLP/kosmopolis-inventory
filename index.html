@@ -1,0 +1,79 @@
+# Save the HTML content into a file for the user to upload to GitHub
+html_content = '''<!DOCTYPE html>
+<html>
+<head>
+  <title>Kosmopolis Inventory Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { font-family: Raleway, sans-serif; padding: 10px; margin: 0; }
+    h2 { margin-bottom: 10px; font-size: 20px; text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: auto; word-wrap: break-word; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: center; font-size: 12px; }
+    th { background-color: #f4f4f4; }
+    .Available { background-color: #d4edda; color: #155724; }
+    .Booked { background-color: #f8d7da; color: #721c24; }
+    .Blocked { background-color: #fff3cd; color: #856404; }
+    .Developer { background-color: #e0f7fa !important; color: #006064; }
+    .Landlord { background-color: #ede7f6 !important; color: #4527a0; }
+    .HighFloor { opacity: 0.8; background-color: #f0f0f0; }
+    select, input, button { margin: 5px 5px 5px 0; padding: 5px; font-size: 12px; }
+    #filters { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
+    #count { margin-top: 10px; font-weight: bold; }
+    tr.fade { opacity: 0; max-height: 0; overflow: hidden; transition: all 0.4s ease; }
+    tr.show { opacity: 1; max-height: 100px; }
+    @media screen and (max-width: 768px) {
+      table, th, td { font-size: 11px; }
+      #filters {
+        flex-direction: column;
+        align-items: flex-start;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+      }
+      #filters.show { max-height: 500px; opacity: 1; }
+      #filterToggleBtn {
+        display: block;
+        margin-bottom: 10px;
+        background-color: #007BFF;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+    }
+  </style>
+</head>
+<body>
+<h2>Kosmopolis Inventory Search</h2>
+<button id="filterToggleBtn" onclick="toggleFilters()" style="display: none;">Show Filters ▼</button>
+<div id="filters">
+  <label>Tower:<select id="Towers"><option value="">All</option></select></label>
+  <label>SFT:<select id="SFT"><option value="">All</option></select></label>
+  <label>Facing:<select id="Facing"><option value="">All</option></select></label>
+  <label>Wing:<select id="Wing"><option value="">All</option></select></label>
+  <label>Floor:<select id="Floors"><option value="">All</option></select></label>
+  <label>From Floor:<select id="FromFloor"><option value="">Any</option></select></label>
+  <label>To Floor:<select id="ToFloor"><option value="">Any</option></select></label>
+  <label>Status:<select id="Status"><option value="">All</option></select></label>
+  <label>Sharing:<select id="Sharing" disabled><option value="">All</option></select></label>
+  <label>Scheme:<select id="Scheme"><option value="">All</option></select></label>
+  <label>Flat No:<input type="text" id="FlatNo" placeholder="Enter flat no"></label>
+  <button onclick="applyFilters()">Search</button>
+</div>
+<div id="count"></div>
+<button id="toggleHighFloors" onclick="toggleHighFloorVisibility()">Show Floors Above 15</button>
+<table id="sheetTable"><thead></thead><tbody></tbody></table>
+<script src="https://gist.githubusercontent.com/raw/your_script.js"></script>
+</body>
+</html>'''
+
+# Save as index.html
+file_path = "/mnt/data/index.html"
+with open(file_path, "w") as f:
+    f.write(html_content)
+
+file_path
